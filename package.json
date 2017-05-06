@@ -14,7 +14,6 @@
   "author": "Zoltan Burgermeiszter <zoltan@burgermeiszter.com>",
   "license": "ISC",
   "dependencies": {
-    "deferred": "^0.7.6",
     "moment": "^2.18.1"
   },
   "devDependencies": {

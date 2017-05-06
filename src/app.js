@@ -16,6 +16,7 @@ applet.onExecute(payload => {
   console.log(`Executed with the following payload: ${payload}\n\n`);
 });
 leaveLocation.update('office car park');
+leaveLocation.update('garage');
 
 
 
@@ -27,8 +28,5 @@ const sendEmail = new SendEmail('root@localhost', `Put the bins out`);
 applet = new Applet(onDayAtTime, sendEmail);
 applet.onExecute(payload => {
   console.log(`Executed with the following payload: ${payload}\n\n`);
-});
-applet.onSkip(payload => {
-  console.log('Skipped.');
 });
 onDayAtTime.now();

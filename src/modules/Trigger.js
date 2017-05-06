@@ -1,23 +1,15 @@
-import deferred from 'deferred';
-
 class Trigger {
   constructor(evaluator) {
     this._evaluator = evaluator;
-    this._deferred = deferred();
   }
 
-  getPromise() {
-    return this._deferred.promise;
+  setActionPerformer(actionPerformer) {
+    this._actionPerformer = actionPerformer;
   }
 
   pull(payload) {
-      const evaluation = this._evaluator(payload);
-
-      if(evaluation) {
-        return this._deferred.resolve(payload);
-      }
-
-      return this._deferred.reject();
+    const evaluation = this._evaluator(payload);
+    evaluation && this._actionPerformer(payload);
   }
 }
 

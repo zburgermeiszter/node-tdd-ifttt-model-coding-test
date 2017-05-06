@@ -4,12 +4,12 @@ import Applet from '../src/modules/Applet';
 import deferred from 'deferred';
 
 describe('Applet', function() {
-  describe('Control flow', function() {
-    beforeEach(function() {
-      const evaluator = input => 123 === input;
-      this.trigger = new Trigger(evaluator);
-    });
+  beforeEach(function() {
+    const evaluator = input => 123 === input;
+    this.trigger = new Trigger(evaluator);
+  });
 
+  describe('Control flow', function() {
     it('Should perform action when trigger condition has been met', function(done) {
       const action = new Action(() => done());
       new Applet(this.trigger, action);
@@ -33,27 +33,17 @@ describe('Applet', function() {
 
   describe('Callbacks', function() {
     beforeEach(function() {
-      this.def = deferred();
-
-      const trigger = {
-        getPromise: () => this.def.promise
-      };
-
       const action = {
         perform: () => {}
       };
 
-      this.applet = new Applet(trigger, action);
+      this.trigger.setActionPerformer(action.perform);
+      this.applet = new Applet(this.trigger, action);
     });
 
     it('Should call onExecute callback', function(done) {
-      this.applet.onExecute(done);
-      this.def.resolve();
-    });
-
-    it('Should call onSkip callback', function(done) {
-      this.applet.onSkip(done);
-      this.def.reject();
+      this.applet.onExecute(() => done());
+      this.trigger.pull(123);
     });
   });
 });
