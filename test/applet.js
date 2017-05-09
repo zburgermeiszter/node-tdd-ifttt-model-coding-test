@@ -1,7 +1,6 @@
 import Action from '../src/modules/Action';
 import Trigger from '../src/modules/Trigger';
 import Applet from '../src/modules/Applet';
-import deferred from 'deferred';
 
 describe('Applet', function() {
   beforeEach(function() {
